@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        SSN Lab 4 - Asymmetrical encryption - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit;overflow:visible}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.figma{display:table;position:relative;width:100%;padding-bottom:56.25%}.figma iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;border:1px solid #eee}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{height:40px;padding:10px 4px;border-top-left-radius:0;border-bottom-left-radius:0}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:20px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:50%;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;text-decoration:none;padding-left:22px}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em;font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="SSN-Lab-4---Asymmetrical-encryption" data-id="SSN-Lab-4---Asymmetrical-encryption"><a class="anchor hidden-xs" href="#SSN-Lab-4---Asymmetrical-encryption" title="SSN-Lab-4---Asymmetrical-encryption"><span class="octicon octicon-link"></span></a><span>SSN Lab 4 - Asymmetrical encryption</span></h1><p><strong><span>Name: Vladimir Shelkovnikov</span></strong></p><hr><h2 id="Task-1---RSA-key-pair-Public-key" data-id="Task-1---RSA-key-pair-Public-key"><a class="anchor hidden-xs" href="#Task-1---RSA-key-pair-Public-key" title="Task-1---RSA-key-pair-Public-key"><span class="octicon octicon-link"></span></a><span>Task 1 - RSA key pair. Public key</span></h2><div class="alert alert-success">
+<ol>
+<li><span>Create a 2048 bit RSA key pair using openssl. Write your full name in a text file and encrypt it with your private key. Using OpenSSL extract the public modulus and the exponent from the public key. Publish your public key and the base64 formatted encrypted text in your report. Verify that it is enough for decryption.</span><br>
+<span>Hint: study openssl params and encryption vs verification vs decryption vs signing.</span></li>
+</ol>
+</div><p><span>I generated a 2048-bit RSA private key using openssl: </span><code>openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048</code><span>.</span><br>
+<span>Then I extract the public key from the RSA key pair with the following command: </span><code>openssl rsa -pubout -in private.pem -out pubkey.pem</code><span>.</span></p><p><span>Figure 1 shows the public key.</span></p><center>
+<p><img src="https://i.imgur.com/Li3vgGi.png" alt="" loading="lazy"><br>
+<span>Figure 1 - Public key</span></p>
+</center><p><span>Let’s now extract the module and exponent from it. The easiest way to do this is to use the following command: </span><code>openssl rsa -pubin -inform PEM -text -noout &lt; pubkey.pem</code><span>. Figure 2 shows the result</span></p><center>
+<p><img src="https://i.imgur.com/BKFQCLf.png" alt="" loading="lazy"><br>
+<span>Figure 2 - Public key in text format</span></p>
+</center><p><span>Thus, the modulus is equal to </span><code>B4DEB7F683852CFA2961666AA541200D57959B92D2F58BFF8BF2404A763F6CF82B01A4DD343789143A71155EA5665DFF82AF6267B225A624A2D5837B29AAB4D6658635AD0E9334ABC8BF5DD85D5280BDFEC8B36B6BEA8AEA694B3A2945260ECD5507649A5E6FC4042B9A54FE533C5A704D7CA0A1E657FE6C2E25CAC93B849200C8F3A186117D942E7E1CFA246EFA20F8FFB13ACF9E0C6CC963215F39CD17E7EF154AAE8F2C95D86A81B2B02680107B2944D6E7CFD9BB95A86E2FF15E44582ACBA72CC0B0B1BD1F89020E76AC283CBD7A0BD94EA95F3AD3679670F5C9E5E0AC05C0109755D8AE3330E07DFF9006D9E1AADF9DE49F0BEF594F30E2D7B191D4B02D</code><span>.</span><br>
+<span>Exponent is 010001 (hex) = 65537.</span></p><p><span>Then I wrote my full name - Vladimir Shelkovnikov in the “message” file.</span></p><div class="alert alert-info">
+<p><span>Encryption with a private key is used to confirm authenticity. If I encrypted a message with my private key, then anyone can decrypt it with my public key, which proves that the message was sent from me, since only I can encrypt it with my private key. In other words, I’m creating a digital signature.</span></p>
+</div><p><span>So I encrypted my message with a private key - </span><code>openssl rsautl -sign -in message -out encrypted -inkey private.pem</code><span>.</span></p><p><span>The result is shown in Figure 3.</span></p><center>
+<p><img src="https://i.imgur.com/nG1bq4S.png" alt="" loading="lazy"><br>
+<span>Figure 3 - Encrypted message</span></p>
+</center><p><span>I encode this result in base64 using the command </span><code>openssl base64 -in encrypted -out encrypted64</code><span>. Figure 4 shows a base64 encoded message.</span></p><center>
+<p><img src="https://i.imgur.com/QjJ4Zc0.png" alt="" loading="lazy"><br>
+<span>Figure 4 - Base64 encoded message</span></p>
+</center><p><span>Also, this text is shown below:</span></p><div class="alert alert-info">
+<p><span>RgTq+jz4xWTt7WZDox0LKtDlQzgs6t/F07yBJLZEYL32n+fwoxIHfEEZ71MHw1Uh</span><br>
+<span>wlngw1FokDHbexsNjOKNi7hL+bdBGUA7YVid7h3NBX+nUYrRKcVE5ibr80xQO362</span><br>
+<span>szJdM/BqF65Qyzaru3reomeRW/2eb+nGZ7rtld1h4kc6flPB25NnJbohysdeJtfY</span><br>
+<span>GpI8heb+rwksYF/h0tOs0La99AoYWtAMTiOrnWG2JbSmUqOScVz6MnHHNaPHier7</span><br>
+<span>1lbsEALpc8Bs64DNH1RumebSwgfCpsXzoiwPB6CrOncHbGLxAQm101zsf/tDx4Dw</span><br>
+<span>ManNimVwhZ+geDPjWj7p3A==</span></p>
+</div><p><span>Here is my public key:</span></p><div class="alert alert-info">
+<p><span>-----BEGIN PUBLIC KEY-----</span><br>
+<span>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtN639oOFLPopYWZqpUEg</span><br>
+<span>DVeVm5LS9Yv/i/JASnY/bPgrAaTdNDeJFDpxFV6lZl3/gq9iZ7IlpiSi1YN7Kaq0</span><br>
+<span>1mWGNa0OkzSryL9d2F1SgL3+yLNra+qK6mlLOilFJg7NVQdkml5vxAQrmlT+Uzxa</span><br>
+<span>cE18oKHmV/5sLiXKyTuEkgDI86GGEX2ULn4c+iRu+iD4/7E6z54MbMljIV85zRfn</span><br>
+<span>7xVKro8sldhqgbKwJoAQeylE1ufP2buVqG4v8V5EWCrLpyzAsLG9H4kCDnasKDy9</span><br>
+<span>egvZTqlfOtNnlnD1yeXgrAXAEJdV2K4zMOB9/5AG2eGq353knwvvWU8w4texkdSw</span><br>
+<span>LQIDAQAB</span><br>
+<span>-----END PUBLIC KEY-----</span></p>
+</div><hr><center>
+<h3 id="Recreating-the-public-key" data-id="Recreating-the-public-key"><a class="anchor hidden-xs" href="#Recreating-the-public-key" title="Recreating-the-public-key"><span class="octicon octicon-link"></span></a><span>Recreating the public key</span></h3>
+</center><hr><p><span>I can recreate the public key using the module and exponent. To do this, I wrote a python script as shown in Figure 5.</span></p><center>
+<p><img src="https://i.imgur.com/xyVdtvR.png" alt="" loading="lazy"><br>
+<span>Figure 5 - A python script to recreate the public key</span></p>
+</center><p><span>Now let’s check it out. Figure 6 shows the result.</span></p><center>
+<p><img src="https://i.imgur.com/PUlpTZT.png" alt="" loading="lazy"><br>
+<span>Figure 6 - Recreated public key</span></p>
+</center><p><span>This public key was saved as a “pub” file. Now let’s verify the message (Figure 7).</span></p><center>
+<p><img src="https://i.imgur.com/mG0OprY.png" alt="" loading="lazy"><br>
+<span>Figure 7 - Verification</span></p>
+</center><p><span>Before checking, I saved the encrypted text in base64 encoding to the “text” file. And then decrypted it, as shown in Figure 7, into the “mes” file, which was then verified (decrypted using the public key).</span></p><hr><h2 id="Task-2---Prime-factors" data-id="Task-2---Prime-factors"><a class="anchor hidden-xs" href="#Task-2---Prime-factors" title="Task-2---Prime-factors"><span class="octicon octicon-link"></span></a><span>Task 2 - Prime factors</span></h2><div class="alert alert-success">
+<ol start="2">
+<li><span>Assuming that you are generating a 1024 bit RSA key and the prime factors have a 512 bit length, what is the probability of picking the same prime factor twice? Explain your answer.</span><br>
+<span>Hint: How many primes with length 512 bit or less exist?</span></li>
+</ol>
+</div><p><span>A 1024-bit key is a result of multiplying two 512-bit primes.</span></p><p><span>According to the function of counting primes for a 512-bit number, this is about 2</span><sup><span>512/log(2</span></sup><span>512) primes, which is </span><code>3,778*10^151</code><span>. But there are infinitely many primes and therefore infinitely many relative primes.</span></p><p><span>But even if there are only prime numbers, the possibility of choosing the same prime factor twice is about </span><code>7 * 10^-304</code><span>.</span></p><hr><h2 id="Task-3---Retrieving-p-and-q" data-id="Task-3---Retrieving-p-and-q"><a class="anchor hidden-xs" href="#Task-3---Retrieving-p-and-q" title="Task-3---Retrieving-p-and-q"><span class="octicon octicon-link"></span></a><span>Task 3 - Retrieving p and q</span></h2><div class="alert alert-success">
+<ol start="3">
+<li><span>Here you can find the modulus (public information) of two related 1024bit RSA keys. Your keys are numbered using the list. Your task is to factor them i.e. retrieve p and q. You may use any tools for this. Explain your approach.</span><br>
+<span>Hints: study the RSA algorithm. What private information can two keys share? What practical attacks exist? You may have to write code or use existing code for simple arithmetic operations. Be careful with bigInt values!</span></li>
+</ol>
+</div><p><span>My modules are shown below:</span></p><div class="alert alert-info">
+<h4 id="Modulus-12" data-id="Modulus-12"><a class="anchor hidden-xs" href="#Modulus-12" title="Modulus-12"><span class="octicon octicon-link"></span></a><span>Modulus 12</span></h4>
+<p><span>0xc452ec3fe6a0380c9d41e09b368abf328e9b06b8752319d060a484fe6bea4ccee0be7648e40c60811cb8525fb7470a1cef6446ed3d76f94200160b3a048dd5f0abc0532effdcf47c06b6441a747b9c43c075844534140f619a6bda664da9fd1841993739975440c4e13c42111d8e7cceb51ee99492c5686a28af7dbf47f4f97fL,</span></p>
+<p><span>0xd77fb3fe37318fbf961448273ed4b24bc4a14bec0afdf5517c27158ff41c5138f339b35f41ba4edb7ed337ba568396483b63cce1792a9a822320c2858cf7f8cd51f905d36e75c0d9680e7e2998eed38c661b1a07571c2fbf5ef511d83599aa45cc468707a207cdb1e97915a0c1a7b3796d4bcfa275339497f666e085154b6d1dL</span></p>
+</div><p><span>I know that the two keys are connected. So I have the following assumptions:</span></p><ol>
+<li><span>Same N;</span></li>
+<li><span>Same prime.</span><br>
+<span>The first one doesn’t fit because my modules are different. So let’s consider that one of the primes is the same for both keys. To test this, I need to find the GCD between two numbers. To do this, I wrote the code that is shown in Figure 8.</span></li>
+</ol><center>
+<p><img src="https://i.imgur.com/Y5Ya3sr.png" alt="" loading="lazy"><br>
+<span>Figure 8 - Python script for GCD search</span></p>
+</center><p><span>First I convert the numbers to decimals, and then I find the gcd using the standard math module. Figure 9 shows the result.</span></p><center>
+<p><img src="https://i.imgur.com/yvv2L6O.png" alt="" loading="lazy"><br>
+<span>Figure 9 - GCD</span></p>
+</center><p><span>Here I have to give an explanation. In Figure 9, the values differ from those shown below. The reason for this is in python 3. At first, I ran the script with it, but when I started doing the fourth task, I got the error </span><code>RSA factors do not match modulus</code><span>. So I checked the values in python 2. This gives me the same p, but q1 and q2 were different. When I divide N/p, python 3 rounds the value of q.</span></p><p><span>So, for these module values, I got:</span></p><div class="alert alert-info">
+<p><span>p1 = p2 = 11481752274061810294026728490997374602740829690130382187812497708654987654459024491515357850497221568333725167111654165671123561134500638469957609470567811</span></p>
+<p><span>q1 = 12007169277732690827964003602726483157531743987002449253877660399009997495197739026045707948323017616061116992432162067084221649916965657186217300363532117</span></p>
+<p><span>q2 = 13179907411366040998875473708957481762826441390925156824492697024213232312425077349420981146595784893259305091166005036015265861330718756805506051626123487</span></p>
+</div><hr><h2 id="Task-4---Public-key" data-id="Task-4---Public-key"><a class="anchor hidden-xs" href="#Task-4---Public-key" title="Task-4---Public-key"><span class="octicon octicon-link"></span></a><span>Task 4 - Public key</span></h2><div class="alert alert-success">
+<ol start="4">
+<li><span>Now‌ ‌that‌ ‌you‌ ‌have‌ ‌the‌ ‌ p‌ ‌and‌ ‌ q‌ ‌for‌ ‌both‌ ‌keys,‌ ‌recreate‌ ‌the‌ ‌first‌‌public‌‌and‌‌</span><br>
+<span>private‌ ‌key‌ ‌using‌ ‌ this‌ ‌script‌.‌ ‌Encrypt‌ ‌your‌ ‌name‌ ‌with‌ ‌the‌ ‌private‌ ‌key‌ ‌and‌ post‌ ‌the‌‌ public‌ ‌key‌ ‌and‌ ‌the‌ ‌base64‌ ‌formatted‌ ‌encrypted‌ ‌data‌ ‌in‌ ‌your‌ ‌report.‌</span></li>
+</ol>
+</div><p><span>I downloaded the script and installed the necessary modules.</span></p><pre><code>sudo apt-get install python-dev
+sudo apt-get install  libgmp-dev
+sudo pip2 install gmpy
+</code></pre><p><span>Then I put my values in the script, but I got a new error “Use the Crypto.Cipher module.Instead PKCS 1_OAEP”. So I rewrote the code as shown in Figure 10.</span></p><center>
+<p><img src="https://i.imgur.com/MzKZeNe.png" alt="" loading="lazy"><br>
+<span>Figure 10 - Script for recreating public and private keys</span></p>
+</center><p><span>Figure 11 shows the result</span></p><center>
+<p><img src="https://i.imgur.com/ZeTtxqr.png" alt="" loading="lazy"><br>
+<span>Figure 11 - Recreated public and private keys</span></p>
+</center><div class="alert alert-info">
+<p><span>-----BEGIN RSA PRIVATE KEY-----</span><br>
+<span>MIICWwIBAAKBgQDEUuw/5qA4DJ1B4Js2ir8yjpsGuHUjGdBgpIT+a+pMzuC+dkjk</span><br>
+<span>DGCBHLhSX7dHChzvZEbtPXb5QgAWCzoEjdXwq8BTLv/c9HwGtkQadHucQ8B1hEU0</span><br>
+<span>FA9hmmvaZk2p/RhBmTc5l1RAxOE8QhEdjnzOtR7plJLFaGoor32/R/T5fwIDAQAB</span><br>
+<span>AoGAL8GUIn8xXjEDV/EREJVzqRKzd1ELfXxcCgY7K8CIgCKa3PndBUxVdVLNK4yJ</span><br>
+<span>Asjc/QbBkhgvhradWr9kX5M5BSNJ31u00YSlsYn0B4KYWCg850vaosblODKQzSQc</span><br>
+<span>CWgBj5n6zVjuyHzV65sPmiTgFmTieE7RBF0fBGhPR45XxfECQQDbOaLU9OlDBlL6</span><br>
+<span>7q3QqBPuXsy0gmDRRG6iy97ilmgFpQsdwA4IG/iW7g1xY3gNf24o9oS/7YeX0/Mm</span><br>
+<span>TxQdtCWDAkEA5UHSJRyxUS/5bhnCu+p71LTAiI9dVkFgfNwkKMZ9F517/VZ8h3pK</span><br>
+<span>XpmJ8h/NEEodcNAWMGF9LaNR+D70K/dXVQJAcpXCnYrRrZ3Nm6lLoqdnm41jc+o9</span><br>
+<span>zsP1DBSBkG/LOUAV+lvbObPdEI6m6iByrKNxoemQY301BU/cZKaqvgfeHwJADzsa</span><br>
+<span>PQD0/tHTHm9zsoxXgcAocmoj51Ecme7+L/9P3DvIOwJ973o+ap6EvaNDOmvSHOaW</span><br>
+<span>MsynRlrtXTLBghJCqQJAQogiMu/I7g0oBo4UhSKei1l9nsq4xYfnem9CbdIA3ZdM</span><br>
+<span>XP8qZiRC8Oj9N5lbSXzFZhacLu4tzBSPw5Hwat3wvQ==</span><br>
+<span>-----END RSA PRIVATE KEY-----</span></p>
+</div><div class="alert alert-info">
+<p><span>-----BEGIN PUBLIC KEY-----</span><br>
+<span>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEUuw/5qA4DJ1B4Js2ir8yjpsG</span><br>
+<span>uHUjGdBgpIT+a+pMzuC+dkjkDGCBHLhSX7dHChzvZEbtPXb5QgAWCzoEjdXwq8BT</span><br>
+<span>Lv/c9HwGtkQadHucQ8B1hEU0FA9hmmvaZk2p/RhBmTc5l1RAxOE8QhEdjnzOtR7p</span><br>
+<span>lJLFaGoor32/R/T5fwIDAQAB</span><br>
+<span>-----END PUBLIC KEY-----</span></p>
+</div><p><span>I have saved these keys as “pubkey” and “private”. Then I encrypted </span><code>Vladimir Shelkovnikov</code><span> (file </span><code>text</code><span>) with a private key: </span><code>openssl rsautl - input to text - output enc1 - private key</code><span>. After that, I encode the ciphertext in base64 </span><code>openssl base64 -e -in end 1 -out ms</code><span> (Figure 12).</span></p><center>
+<p><img src="https://i.imgur.com/b1ALfT0.png" alt="" loading="lazy"><br>
+<span>Figure 12 - Encoded ciphertext</span></p>
+</center><p><span>Ciphertext is shown below:</span></p><div class="alert alert-info">
+<p><span>oqUH3hIZDeEn4yYvropuyKdgWUIFg+7frmaVSy7VFz0pUDcf1CJZ8apngNNLMfaA</span><br>
+<span>NYS7zy5YqyaxFkiqIPtKI+uk+IiPnlOkov+0t4J0qVJZN/aZ53C8LQPJvYYURbrL</span><br>
+<span>C3i4ct0zupq47MMZjwUkvH4jYxA4W5mfvmI3ew6QF/Y=</span></p>
+</div><p><span>Now let’s check if everything is in order. First decrypted it from base64 - </span><code>openssl base64 -d -in mes -out encrypted</code><span>. And then I verified this - </span><code>openssl rsautl -verify -in encrypted -inkey pubkey -pubin</code><span> (Figure 13).</span></p><center>
+<p><img src="https://i.imgur.com/XYfTwSM.png" alt="" loading="lazy"><br>
+<span>Figure 13 - Verified message</span></p>
+</center><hr><h2 id="Task-5---Web-of-trust" data-id="Task-5---Web-of-trust"><a class="anchor hidden-xs" href="#Task-5---Web-of-trust" title="Task-5---Web-of-trust"><span class="octicon octicon-link"></span></a><span>Task 5 - Web of trust</span></h2><div class="alert alert-success">
+<ol start="5">
+<li><span>Using GPG implement a small web of trust in your group of 4 people:</span></li>
+</ol>
+<ul>
+<li><span>Stage 1: create your PGP keys and exchange and sign each other’s key as in the picture (as you can see on the picture, at this stage the 1st participant exchanges with 2nd and 4th, but not with 3rd). After exchange, verify that you can communicate securely with that person.</span></li>
+<li><span>Stage 2: obtain a public key of a person that you have not contacted yet and send them a private message alongside your public key. At this point you do not need to sign each other’s keys, since your keys are already signed by 2 other trusted members, so you should be able to securely communicate without it.</span><br>
+<span>Describe what you have done to implement this model. (If your group size is &lt; 4 - please some person from another group to also participate in your group)</span></li>
+</ul>
+</div><p><span>I have generated PGP keys as shown in Figure 14.</span></p><center>
+<p><img src="https://i.imgur.com/NnxP6oy.png" alt="" loading="lazy"><br>
+<span>Figure 14 - Generating PGP keys</span></p>
+</center><p><span>I can check the key using </span><code>gpg --list key</code><span> (Figure 15).</span></p><center>
+<p><img src="https://i.imgur.com/mYCEmDG.png" alt="" loading="lazy"><br>
+<span>Figure 15 - Checking key</span></p>
+</center><p><span>This key was uploaded to the ubuntu keyserver as shown in Figure 16.</span></p><center>
+<p><img src="https://i.imgur.com/zqoVysg.png" alt="" loading="lazy"><br>
+<span>Figure 16 - Uploading key to the keyserver</span></p>
+</center><p><span>Then I exchanged keys with Ilya (2) - </span><code>gpg --keyserver keyserver.ubuntu.com --recv-keys 46D48A64C97910D23E4ADED41518B420223D9541</code><span>.</span></p><p><span>After that, I signed his key with the command </span><code>gpg --sign-key 46D48A64C97910D23E4ADED41518B420223D9541</code><span>.</span></p><p><span>I uploaded his key to the key server </span><code>gpg --send-keys 46D48A64C97910D23E4ADED41518B420223D9541</code><span>.</span></p><center>
+<p><img src="https://i.imgur.com/se63w2Q.png" alt="" loading="lazy"><br>
+<span>Figure 17 - Signing Ilya’s Key</span></p>
+</center><p><span>The same operations that I did with Alisher’s (4) key (Figure 18)</span></p><center>
+<p><img src="https://i.imgur.com/6EBvnVa.png" alt="" loading="lazy"><br>
+<span>Figure 18 - Signing Alisher’s Key</span></p>
+</center><p><span>Then I received Ivan’s public key and encrypted my message (Figure 19).</span></p><center>
+<p><img src="https://i.imgur.com/xkTMvG3.png" alt="" loading="lazy"><br>
+<span>Figure 19 - Message encryption</span></p>
+</center><p><span>I received an encrypted message from Ivan (3) and decrypted it as shown in Figure 20.</span></p><center>
+<p><img src="https://i.imgur.com/xdpxH4E.png" alt="" loading="lazy"><br>
+<span>Figure 20 - Decryption of the message from Ivan</span></p>
+</center><p><span>Figure 21 shows the decrypted message from Ilya.</span></p><center>
+<p><img src="https://i.imgur.com/hfF1Ctm.png" alt="" loading="lazy"><br>
+<span>Figure 21 - Decryption of the message from Ilya</span></p>
+</center><hr><h2 id="References" data-id="References"><a class="anchor hidden-xs" href="#References" title="References"><span class="octicon octicon-link"></span></a><span>References</span></h2><ol>
+<li><a href="https://en.wikipedia.org/wiki/Prime-counting_function" target="_blank" rel="noopener"><span>Prime-counting function</span></a></li>
+<li><a href="https://medium.com/@bn121rajesh/understanding-rsa-public-key-70d900b1033c" target="_blank" rel="noopener"><span>RSA public key : Behind the scene</span></a></li>
+<li><a href="https://www.asciitohex.com/" target="_blank" rel="noopener"><span>ASCII to Hex</span></a></li>
+<li><a href="https://www.sjoerdlangkemper.nl/2019/06/19/attacking-rsa/" target="_blank" rel="noopener"><span>Attacking RSA keys</span></a></li>
+<li><a href="http://www.enseignement.polytechnique.fr/profs/informatique/Francois.Morain/Master1/Crypto/projects/Weger02.pdf" target="_blank" rel="noopener"><span>Cryptanalysis of RSA with Small Prime Difference</span></a></li>
+<li><a href="http://www.loyalty.org/~schoen/rsa/" target="_blank" rel="noopener"><span>Understanding Common Factor Attacks: An RSA-Cracking Puzzle</span></a></li>
+<li><a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener"><span>RsaCtfTool</span></a></li>
+</ol></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#SSN-Lab-4---Asymmetrical-encryption" title="SSN Lab 4 - Asymmetrical encryption">SSN Lab 4 - Asymmetrical encryption</a><ul class="nav">
+<li><a href="#Task-1---RSA-key-pair-Public-key" title="Task 1 - RSA key pair. Public key">Task 1 - RSA key pair. Public key</a></li>
+<li><a href="#Task-2---Prime-factors" title="Task 2 - Prime factors">Task 2 - Prime factors</a></li>
+<li><a href="#Task-3---Retrieving-p-and-q" title="Task 3 - Retrieving p and q">Task 3 - Retrieving p and q</a></li>
+<li><a href="#Task-4---Public-key" title="Task 4 - Public key">Task 4 - Public key</a></li>
+<li><a href="#Task-5---Web-of-trust" title="Task 5 - Web of trust">Task 5 - Web of trust</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#SSN-Lab-4---Asymmetrical-encryption" title="SSN Lab 4 - Asymmetrical encryption">SSN Lab 4 - Asymmetrical encryption</a><ul class="nav">
+<li><a href="#Task-1---RSA-key-pair-Public-key" title="Task 1 - RSA key pair. Public key">Task 1 - RSA key pair. Public key</a></li>
+<li><a href="#Task-2---Prime-factors" title="Task 2 - Prime factors">Task 2 - Prime factors</a></li>
+<li><a href="#Task-3---Retrieving-p-and-q" title="Task 3 - Retrieving p and q">Task 3 - Retrieving p and q</a></li>
+<li><a href="#Task-4---Public-key" title="Task 4 - Public key">Task 4 - Public key</a></li>
+<li><a href="#Task-5---Web-of-trust" title="Task 5 - Web of trust">Task 5 - Web of trust</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
